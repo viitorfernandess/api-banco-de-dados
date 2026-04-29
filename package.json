@@ -18,6 +18,7 @@
   "homepage": "https://github.com/viitorfernandess/api-banco-de-dados#readme",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "pg": "^8.20.0"
   }
