@@ -1,0 +1,24 @@
+{
+  "name": "api-banco-de-dados",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viitorfernandess/api-banco-de-dados.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viitorfernandess/api-banco-de-dados/issues"
+  },
+  "homepage": "https://github.com/viitorfernandess/api-banco-de-dados#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  }
+}
