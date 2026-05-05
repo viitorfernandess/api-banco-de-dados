@@ -1,3 +1,5 @@
+const { query } = require("../database")
+
 class Product {
     constructor(productRow) {
         this.id = productRow.id
@@ -9,4 +11,11 @@ class Product {
         this.createdAt = productRow.created_at
         this.updatedAt = productRow.updated_at
     }
+
+    static async findAll() {
+        const result = await query( `SELECT * FROM products;`)
+        return result.rows.map((row) => new Product(row))
+    }
 }
+
+module.exports = Product
