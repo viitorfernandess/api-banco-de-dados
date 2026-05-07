@@ -1,12 +1,16 @@
+const Product = require("../models/product")
+
 const productsController = {
     // GET /products
     index: async (req, res) => {
-
+        const products = await Product.findAll()
+        res.json(products)
     },
 
     // POST /products
     create: async (req, res) => {
-
+        const newProduct = await Product.create(req.body)
+        res.status(201).json(newProduct)
     },
 
     // GET /products/:id
