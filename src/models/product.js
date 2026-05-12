@@ -58,6 +58,11 @@ class Product {
 
         return product
     }
+
+    static async delete(id) {
+        await query(`DELETE FROM products WHERE id = $1`, [id])
+        return { message: "Product deleted successfully." }
+    }
 }
 
 module.exports = Product

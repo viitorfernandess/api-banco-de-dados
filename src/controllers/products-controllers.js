@@ -27,7 +27,8 @@ const productsController = {
 
     // DELETE /products/:id
     delete: async (req, res) => {
-
+        const result = await Product.delete(req.params.id)
+        res.json(result)
     }
 }
 
