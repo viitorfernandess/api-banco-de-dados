@@ -15,7 +15,8 @@ const productsController = {
 
     // GET /products/:id
     show: async (req, res) => {
-
+        const product = await Product.findById(req.params.id)
+        return res.json(product)
     },
 
     // PUT /products/:id
