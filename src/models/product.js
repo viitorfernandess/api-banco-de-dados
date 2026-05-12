@@ -26,8 +26,37 @@ class Product {
     }
 
     static async findById(id) {
-        const result = await query( `SELECT * FROM products WHERE id = $1`, [id])
+        const result = await query(`SELECT * FROM products WHERE id = $1`, [id])
         return new Product(result.rows[0])
+    }
+
+    static async update(id, attributes) {
+        const { rows } = await query(`SELECT * FROM products WHERE id = $1`, [id])
+        const product = new Product(rows[0])
+
+        Object.assign(product, attributes)
+        product.updatedAt = new Date()
+
+        await query(
+            `UPDATE products SET
+                name = $1,
+                description = $2,
+                price = $3,
+                stock_quantity = $4,
+                is_active = $5,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = $6;`,
+            [
+                product.name,
+                product.description,
+                product.price,
+                product.stockQuantity,
+                product.isActive,
+                product.id
+            ]
+        )
+
+        return product
     }
 }
 

@@ -21,7 +21,8 @@ const productsController = {
 
     // PUT /products/:id
     update: async (req, res) => {
-
+        const updatedProduct = await Product.update(req.params.id, req.body)
+        res.json(updatedProduct)
     },
 
     // DELETE /products/:id
