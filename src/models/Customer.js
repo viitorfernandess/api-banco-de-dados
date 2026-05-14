@@ -19,4 +19,12 @@ class Customer {
         if (!result.rows[0]) return null
         return new Customer(result.rows[0])
     }
+
+    static async create(attributes) {
+        const result = await query(`INSERT INTO customers (name, email) VALUES ($1, $2) RETURNING *;`,
+            [attributes.name, attributes.email]
+        )
+
+        return new Customer(result.rows[0])
+    }
 }
