@@ -10,7 +10,13 @@ class Customer {
     }
 
     static async findAll() {
-        const result = await query( `SELECT * FROM customers;`)
+        const result = await query(`SELECT * FROM customers;`)
         return result.rows.map((row) => new Customer(row))
+    }
+
+    static async findById(id) {
+        const result = await query(`SELECT * FROM customers WHERE id = $1`, [id])
+        if (!result.rows[0]) return null
+        return new Customer(result.rows[0])
     }
 }
