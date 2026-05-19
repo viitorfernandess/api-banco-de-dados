@@ -43,4 +43,10 @@ class Customer {
 
         return customer
     }
+
+    static async delete(id) {
+        const result = await query(`DELETE FROM customers WHERE id = $1 RETURNING *;`, [id])
+        if (!result.rows[0]) return null
+        return new Customer(result.rows[0])
+    }
 }
