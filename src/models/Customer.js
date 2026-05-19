@@ -27,4 +27,20 @@ class Customer {
 
         return new Customer(result.rows[0])
     }
+
+    static async update(id, newAttributes) {
+        const results = await query(`SELECT * FROM customers WHERE id = $1`, [id])
+        if (!results.rows[0]) return null
+        const customer = new Customer(results.row[0])
+
+        Object.assign(customer, newAttributes)
+        customer.updatedAt = new Date()
+
+        await query(
+            `UPDATE customers SET name = $1, email = $2, update_at = CURRENT_TIMESTAMP WHERE id = $3;`,
+            [customer.name, customer.email, customer.id]
+        )
+
+        return customer
+    }
 }
