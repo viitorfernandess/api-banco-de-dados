@@ -50,3 +50,5 @@ class Customer {
         return new Customer(result.rows[0])
     }
 }
+
+module.exports = Customer
