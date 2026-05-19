@@ -27,6 +27,10 @@ const customerController = {
         res.json(updatedCustomer)
     },
 
-    
+    delete: async (req, res) => {
+        const deletedCustomer = await Customer.delete(req.params.id)
+        if (!deletedCustomer) return res.status(404).json({ message: "Custoemr not found! " })
+        res.json({ message: "Customer deleted successfully", deletedCustomer })
+    }
 
 }
