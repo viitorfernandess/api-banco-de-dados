@@ -1,6 +1,6 @@
 const Customer = require("../models/Customer")
 
-const customerController = {
+const customersController = {
     // GET /customers
     index: async (req, res) => {
         const customers = await Customer.findAll()
@@ -29,8 +29,10 @@ const customerController = {
 
     delete: async (req, res) => {
         const deletedCustomer = await Customer.delete(req.params.id)
-        if (!deletedCustomer) return res.status(404).json({ message: "Custoemr not found! " })
+        if (!deletedCustomer) return res.status(404).json({ message: "Customer not found! " })
         res.json({ message: "Customer deleted successfully", deletedCustomer })
     }
 
 }
+
+module.exports = customersController
