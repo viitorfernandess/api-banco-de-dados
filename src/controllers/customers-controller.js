@@ -18,6 +18,15 @@ const customerController = {
         const customer = await Customer.findById(req.params.id)
         if (!customer) return res.status(404).json({ message: "Customer not found! " })
         res.json(customer)
-    }
+    },
+
+    // PUT /custoemrs/:id
+    update: async (req, res) => {
+        const updatedCustomer = await Customer.update(req.params.id, req.body)
+        if (!updatedCustomer) return res.status(404).json({ message: "Customer not found! " })
+        res.json(updatedCustomer)
+    },
+
+    
 
 }
