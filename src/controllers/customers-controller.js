@@ -13,4 +13,11 @@ const customerController = {
         res.status(201).json(newCustomer)
     },
 
+    // GET /customers/:id
+    show: async (req, res) => {
+        const customer = await Customer.findById(req.params.id)
+        if (!customer) return res.status(404).json({ message: "Customer not found! " })
+        res.json(customer)
+    }
+
 }
