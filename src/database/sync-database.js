@@ -38,6 +38,19 @@ async function syncDatabase() {
         `)
         console.log('Created "orders" table.')
 
+        await query(`
+            CREATE TABLE IF NOT EXISTS order_products (
+            order_id INT,
+            product_id INT,
+            quantity INT NOT NULL DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (order_id, product_id),
+            FOREIGN KEY (order_id) REFERENCES orders (id),
+            FOREIGN KEY (product_id) REFERENCES products (id)
+            );
+            `)
+            console.log('Created "order_products" table')
+
     process.exit(1);
 }
 
