@@ -2,7 +2,7 @@ const { query } = require("./index")
 
 async function syncDatabase() {
     await query(`
-        CREATE TABLE IF NOT EXISTS products (
+    CREATE TABLE IF NOT EXISTS products (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         description TEXT,
@@ -12,11 +12,11 @@ async function syncDatabase() {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         is_active BOOLEAN DEFAULT TRUE
         );
-        `);
+        `)
     console.log('Created "products" table.');
 
     await query(`
-         CREATE TABLE IF NOT EXISTS customers (
+    CREATE TABLE IF NOT EXISTS customers (
          id SERIAL PRIMARY KEY,
          name VARCHAR(255) NOT NULL,
          email VARCHAR(255) NOT NULL UNIQUE,
@@ -25,6 +25,18 @@ async function syncDatabase() {
          );   
      `)
     console.log('Created "customers" table.');
+
+    await query(`
+    CREATE TABLE IF NOT EXISTS orders (
+        id SERIAL PRIMARY KEY,
+        customer_id INT NOT NULL,
+        total DECIMAL(10, 2) NOT NULL DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (customer_id) REFERENCES customers (id)
+        );
+        `)
+        console.log('Created "orders" table.')
 
     process.exit(1);
 }
