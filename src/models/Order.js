@@ -22,10 +22,13 @@ class Order {
         orders.*,
         customers.id AS "customer.id",
         customers.name AS "customer.name",
-        cusomers.email AS "customer.email",
+        customers.email AS "customer.email",
         customers.created_at AS "customer.created_at",
-        customers.updated_at AS "custoemrs.updated_at"
+        customers.updated_at AS "customers.updated_at"
     FROM orders JOIN customers ON customers.id = orders.customer_id;     
     `)
+        return result.rows.map((row) => new Order(row))
     }
+
+
 }
